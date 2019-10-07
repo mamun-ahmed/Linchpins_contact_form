@@ -7,41 +7,8 @@ A contact form with attachment for Linchpins.
 ## Requirements
 
 ### SMTP Configuration
-To use Gmail SMTP, you have make to your Gmail account less secure. To do that, click  [here](https://myaccount.google.com/lesssecureapps?pli=1)
-Without configuration this, you can not send mail. [Read in details](https://nodemailer.com/usage/using-gmail/).
-
-To configure SMTP in this project go to **line 64 & 65** of **index.js** file. Write your SMTP mail and Password.
-```
-const  transporter  =  nodeMailer.createTransport({
-	host:  'smtp.gmail.com',
-	port:  465,
-	secure:  true,
-	auth: {
-		// should be replaced with real sender's account
-		user:  'mamun.dev.less@gmail.com',
-		pass:  'AzYm12X?@12'
-	},
-	tls:{
-	rejectUnauthorized:  false
-	}
-}); 
-```
-If you want to add more recipient, insert the mail address in the array like in **line 87** in __index.js__ file like below.
-```
-let  mailOptions  = {
-	from:  `"no-reply" <pixel.wax.shop@gmail.com>`,
-	to: ['pixel.wax.shop@gmail.com','irtacreative@gmail.com','mvitale@linchpins.com', 'dorota@linchpins.com'],
-	subject:  `Inquiry ${newDate}`,
-	html:  `User has sent an inquiry. <br/>Name: ${req.body.name}<br/>Email: ${req.body.email}<br/>Message: ${req.body.message}`,
-	attachments: [
-					{
-						filename:  attachment,
-						path:  __dirname  +  '/public/uploads/'+  attachment
-					}
-
-				 ]
-		}
-```
+To use Gmail SMTP, you have make your Gmail account less secure. To do that, click  [here](https://myaccount.google.com/lesssecureapps?pli=1)
+Without configuration this, you can not send mail. [Read in details](https://nodemailer.com/usage/using-gmail/)
 
 ### Using Docker
 Go to the root folder of project. 
@@ -114,3 +81,7 @@ $ yarn install
 ## Running the project
 
 $ yarn start
+
+# Configure SMTP and Recipients 
+Login to back-end dashboard by this following url,
+http://your-domain/users/login
