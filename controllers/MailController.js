@@ -21,6 +21,8 @@ const mailer = {
             ]
         }
 
+        console.log(JSON.stringify(mailOptions, null, 2));
+
         transporter.sendMail(mailOptions, (error, info) => {
             if(error){
                 console.log(error);
