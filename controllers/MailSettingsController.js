@@ -5,7 +5,7 @@ const MailSettingsController = {
     update: function(req, res){
         
         console.log(__dirname);
-        console.log(path.join(__dirname+'../data', 'data.json'));
+        console.log(path.join(__dirname+'/../data', 'data.json'));
         const rawData = fs.readFileSync('data/data.json');
         const data = JSON.parse(rawData);
 
