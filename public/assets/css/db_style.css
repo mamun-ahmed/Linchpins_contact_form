@@ -622,4 +622,4 @@ ul.cv_db_user_nav li:last-child{margin-right: 0px;}
 
 /*Footer*/
 
-footer#footer{position: absolute;width: 100%;bottom: 0;}
+footer#footer{position: relative;width: 100%;bottom: 0;}
