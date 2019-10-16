@@ -1,5 +1,5 @@
 const fs = require('fs');
-
+const response =require('../helper/status')
 const UserController = {
     landing: function(req, res){
         res.render('login', { title: 'Linchpins Login' });
@@ -66,7 +66,8 @@ const UserController = {
 
                 return res.render('user', {title: 'User-Settings', auth: data.auth, error: error});
             }
-            res.redirect('/settings/user');
+            const success = response.response(true, false, `User settings saved successfully!`);
+            res.render('user',{title: 'User-Settings', auth: data.auth, success})
         });
     }
 }

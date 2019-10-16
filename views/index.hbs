@@ -103,39 +103,59 @@
                 <div class="card">
                   <div class="card-header">
                     SMTP Configure
+                    <button class="btn btn-success pull-right" id="edit" type="button">Edit</button>
+
                   </div><!-- end of card-header -->
 
                   <div class="card-body">
                     <form action="/settings/smtp" method="POST">
-
+                    <br>
                       <div class="form-group">
                         <label for="smtp-host">SMTP Host</label>
-                        <input type="text" name="smtp_host" class="form-control  mt-2" id="smtp-host" aria-describedby="smtp-host" placeholder="SMTP host" value="{{smtp.host}}" >
+                        <input type="text" name="smtp_host" class="form-control palin-field mt-2" id="smtp-host" aria-describedby="smtp-host" placeholder="SMTP host" value="{{smtp.host}}" readonly='true' >
+                      {{#if error.status}}
+                        <span class="text-danger error h6 pt-2 d-block">{{error.message.host}}</span>
+                    {{/if}}
                       </div><!-- end of form-group -->
 
                       <div class="form-group">
                         <label for="smtp-port">SMTP Port</label>
-                        <input type="text" name="smtp_port" class="form-control  mt-2" id="smtp-port" aria-describedby="smtp-port" placeholder="SMTP Port" value="{{smtp.port}}">
+                        <input type="text" name="smtp_port" class="form-control palin-field mt-2" id="smtp-port" aria-describedby="smtp-port" placeholder="SMTP Port" value="{{smtp.port}}" readonly='true'  >
+                         {{#if error.status}}
+                        <span class="text-danger error h6 pt-2 d-block">{{error.message.port}}</span>
+                    {{/if}}
                       </div><!-- end of form-group -->
 
                       <div class="form-group">
                         <label for="smtp-user">SMTP User</label>
-                        <input type="text" name="smtp_user" class="form-control  mt-2" id="smtp-user" aria-describedby="smtp-user" placeholder="SMTP User" value="{{smtp.user}}">
+                        <input type="text" name="smtp_user" class="form-control palin-field mt-2" id="smtp-user" aria-describedby="smtp-user" placeholder="SMTP User" value="{{smtp.user}}" readonly="true" >
+                    {{#if error.status}}
+                        <span class="text-danger error h6 pt-2 d-block">{{error.message.user}}</span>
+                    {{/if}}
                       </div><!-- end of form-group -->
 
                       <div class="form-group">
                         <label for="smtp-pass">SMTP Password</label>
-                        <input type="text" name="smtp_pass" class="form-control  mt-2" id="smtp-pass" placeholder="Password" value="{{smtp.pass}}">
+                        <input type="text" name="smtp_pass" class="form-control palin-field  mt-2" id="smtp-pass" placeholder="Password" value="{{smtp.pass}}" readonly='true'>
+                         {{#if error.status}}
+                        <span class="text-danger error h6 pt-2 d-block">{{error.message.password}}</span>
+                        {{/if}}
                       </div><!-- end of form-group -->
 
                       <div class="form-group form-check">
                         <input type="checkbox" name="tls_secure" class="form-check-input" id="exampleCheck1" {{#if smtp.tls}} checked {{/if}}>
                         <label class="form-check-label" for="exampleCheck1">TLS Secure</label>
                       </div><!-- end of form-group -->
-                      <input type="submit" class="btn btn-primary" value="Save" />
+                      <input type="submit" class="btn btn-primary" value="Save"/>
                     </form><!-- end of form -->
-                    {{#if error.status}}
-                        <span class="text-danger h6 pt-2 d-block">{{error.message}}</span>
+                    {{#if success.success}}
+                    <br>
+                   <div id="alerts" class="alert alert-success alert-dismissible fade show" role="alert">
+                   <strong>Success</strong> {{success.message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                     </button>
+                    </div>
                     {{/if}}
                   </div><!-- end of card-body -->
                 </div><!-- end of card -->
@@ -143,7 +163,6 @@
             </div><!-- end of row -->
           </div><!-- end of container-fluid -->
         </section><!-- end of cv_db_content_area -->
-
       </main><!-- end of cv_db_main_content -->
     </div><!-- end of allWrapper -->
 
@@ -152,6 +171,20 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="/assets/js/db_style.js"></script>
+    <script>
+     $('#edit').on('click',function(){
+        $('input').toggleClass('palin-field');
+        $('input').attr('readonly',false);
+        $('input[type=submit]').attr('disabled',false)
+      })
+      setTimeout(function(){
+        $('#alerts').remove();
+        $('.error').remove();
+        },3000) 
+      
+     
+    </script>
   </body>
 </html>

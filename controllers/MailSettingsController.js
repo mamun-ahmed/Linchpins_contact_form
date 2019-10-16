@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const response=require('../helper/status')
 
 const MailSettingsController = {
     update: function(req, res){
@@ -9,14 +10,34 @@ const MailSettingsController = {
         const rawData = fs.readFileSync('data/data.json');
         const data = JSON.parse(rawData);
 
+            const recipients= req.body.recipient;
+            console.log(req.body.recipients)
+            console.log(req.body)
+            if(recipients==undefined){
+                const err = response.response(false, true, `Minimum On field required`);
+               return res.render('mail',{title: 'Mail-Settings', mail: data.mail, err});
+            }
+            if(req.body=={}){
+                const err = response.response(false, true, `Minimum On field required`);
+                res.render('mail',{title: 'Mail-Settings', mail: data.mail, err})
+            }
+            recipients.forEach(recipient => {
+                if(recipient==null || recipient == undefined || recipient =="" ){
+                    const err = response.response(false, true, `One Mail filed is empty! check manually`);
+                    res.render('mail',{title: 'Mail-Settings', mail: data.mail, err})
+                }
+            });
         data.mail.recipient = req.body.recipient;
+
+
 
         fs.writeFile('data/data.json', JSON.stringify(data), function(err){
             if(err){
                 console.log(`SmtpController::Update error: ${err}`);
-                res.render('mail', {title: 'SMTP-Settings', mail: data.mail});
+                res.render('mail', {title: 'Mail-Settings', mail: data.mail});
             }
-            res.redirect('/settings/mail');
+            const success = response.response(true, false, `Mail settings saved successfully!`);
+            res.render('mail',{title: 'Mail-Settings', mail: data.mail, success})
         });
     }
 }
