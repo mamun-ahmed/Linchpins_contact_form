@@ -7,7 +7,7 @@ A contact form with attachment for Linchpins.
 ## Requirements
 
 ### SMTP Configuration
-To use Gmail SMTP, you have make your Gmail account less secure. To do that, click  [here](https://myaccount.google.com/lesssecureapps?pli=1)
+To use Gmail SMTP, you have make your Gmail account less secure. To do that, click  [here](https://myaccount.google.com/lesssecureapps?pli=1) and disable captcha by clicking [here](https://accounts.google.com/b/0/displayunlockcaptcha)
 Without configuration this, you can not send mail. [Read in details](https://nodemailer.com/usage/using-gmail/)
 
 ### Using Docker
