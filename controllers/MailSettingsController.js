@@ -12,7 +12,7 @@ const MailSettingsController = {
         const recipients= req.body.recipient;
         
         if(recipients == undefined){
-            const err = response.response(false, true, `Minimum On field required`);
+            const err = response.response(false, true, `Minimum One field required`);
             return res.render('mail',{title: 'Mail-Settings', mail: data.mail, err});
         }
         
