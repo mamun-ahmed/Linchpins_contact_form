@@ -115,28 +115,28 @@
                         <input type="text" name="smtp_host" class="form-control palin-field mt-2" id="smtp-host" aria-describedby="smtp-host" placeholder="SMTP host" value="{{smtp.host}}" readonly='true' >
                       {{#if error.status}}
                         <span class="text-danger error h6 pt-2 d-block">{{error.message.host}}</span>
-                    {{/if}}
+                      {{/if}}
                       </div><!-- end of form-group -->
 
                       <div class="form-group">
                         <label for="smtp-port">SMTP Port</label>
                         <input type="text" name="smtp_port" class="form-control palin-field mt-2" id="smtp-port" aria-describedby="smtp-port" placeholder="SMTP Port" value="{{smtp.port}}" readonly='true'  >
                          {{#if error.status}}
-                        <span class="text-danger error h6 pt-2 d-block">{{error.message.port}}</span>
-                    {{/if}}
+                          <span class="text-danger error h6 pt-2 d-block">{{error.message.port}}</span>
+                        {{/if}}
                       </div><!-- end of form-group -->
 
                       <div class="form-group">
                         <label for="smtp-user">SMTP User</label>
                         <input type="text" name="smtp_user" class="form-control palin-field mt-2" id="smtp-user" aria-describedby="smtp-user" placeholder="SMTP User" value="{{smtp.user}}" readonly="true" >
-                    {{#if error.status}}
+                      {{#if error.status}}
                         <span class="text-danger error h6 pt-2 d-block">{{error.message.user}}</span>
-                    {{/if}}
+                      {{/if}}
                       </div><!-- end of form-group -->
 
                       <div class="form-group">
                         <label for="smtp-pass">SMTP Password</label>
-                        <input type="text" name="smtp_pass" class="form-control palin-field  mt-2" id="smtp-pass" placeholder="Password" value="{{smtp.pass}}" readonly='true'>
+                        <input type="password" name="smtp_pass" class="form-control palin-field  mt-2" id="smtp-pass" placeholder="Password"  readonly='true'> {{!-- value="{{smtp.pass}}" --}}
                          {{#if error.status}}
                         <span class="text-danger error h6 pt-2 d-block">{{error.message.password}}</span>
                         {{/if}}

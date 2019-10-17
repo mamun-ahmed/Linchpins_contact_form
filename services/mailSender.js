@@ -33,7 +33,7 @@ const fs = require('fs');
         const newDate = new Date(Date.now());
         const recipient = data.mail.recipient;
         return {
-            from: `"no-reply" ${data.mail.from}`,
+            from: `"no-reply" <${data.mail.from}>`,
             to: recipient,
             subject: `Inquiry ${newDate}`,
             html: `User has sent an inquiry. <br/>Name: ${name}<br/>Email: ${email}<br/>Message: ${message}`,
