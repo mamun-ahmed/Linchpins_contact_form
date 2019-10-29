@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const passport = require('passport');
 const logger = require('morgan');
 const multer = require('multer');
 
@@ -11,6 +12,9 @@ const indexRouter   = require('./routes/index');
 const usersRouter   = require('./routes/users');
 const mailerRouter  = require('./routes/mailer');
 const settings      = require('./routes/settings');
+
+//Passport config
+require('./config/passport')(passport);
 
 let app = express();
 
@@ -32,9 +36,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({express: true}));
 app.use(cookieParser());
 app.use(session({
-    secret: 'AzYm12X?@12',
-}));
+        secret: 'AzYm12X?@12',
+        resave: true,
+        saveUninitialized: true
+    })
+);
 
+//Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 function getFileName(originalName){
     let output = originalName.substr(0, originalName.lastIndexOf('.')) || originalName;
@@ -84,8 +94,11 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  console.log(err);
-  res.render('404');
+  if(err){
+      console.log(err);
+      res.render('404');
+  }
+
 });
 
 module.exports = app;

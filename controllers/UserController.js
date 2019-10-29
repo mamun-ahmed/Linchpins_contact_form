@@ -1,30 +1,22 @@
 const fs = require('fs');
+const passport = require('passport');
+
 const response =require('../helper/status')
+
 const UserController = {
-    landing: function(req, res){
+    landing: function(req, res, next){
         res.render('login', { title: 'Linchpins Login' });
     },
-    login: function(req, res){
-        const userName = req.body.username;
-        const password = req.body.password;
-
-        const rawData = fs.readFileSync('data/data.json');
-        const data = JSON.parse(rawData);
-
-        if(userName == data.auth.user && password == data.auth.pass){
-            res.redirect('/settings/index');
-        }else{
-            const error = {
-                status: true,
-                message: `Email or Password didn't match.`
-            }
-
-            return res.render('login', {title: 'Linchpins Login', error: error});
-        }
+    login: function(req, res, next){
+            passport.authenticate('local', {
+                successRedirect: '/settings/index',
+                failureRedirect: '/users/login'
+            })(req, res, next);
     },
     logout: function(req, res){
         console.log(`logging out`);
-        res.redirect('login');
+        req.logout();
+        res.redirect('/users/login');
     },
     signup: function(req, res){
 
